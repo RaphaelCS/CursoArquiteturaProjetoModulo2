@@ -23,8 +23,6 @@ public class Conta {
         this.cliente = cliente;
     }
 
-
-
     public Conta(Integer numero, BigDecimal saldo, Cliente cliente) {
         this.numero = numero;
         this.saldo = saldo;
@@ -44,16 +42,8 @@ public class Conta {
         return saldo;
     }
 
-    public void setSaldo(BigDecimal saldo) {
-        this.saldo = saldo;
-    }
-
     public LocalDate getDataCriacao() {
         return dataCriacao;
-    }
-
-    public void setDataCriacao(LocalDate dataCriacao) {
-        this.dataCriacao = dataCriacao;
     }
 
     public void saque(BigDecimal valor){
@@ -71,14 +61,14 @@ public class Conta {
         System.out.println("Deposito efetuado!");
     }
 
-    public void transferencia(Conta conta, BigDecimal valor, Conta contaDestino){
-        BigDecimal taxa = getTaxa(conta.cliente,valor);
+    public void transferencia(BigDecimal valor, Conta contaDestino){
+        BigDecimal taxa = getTaxa(cliente,valor);
         if (valor.add(taxa).compareTo(saldo)==1){
             System.out.println("Saldo insuficiente.");
             return;
         }
         saldo = saldo.subtract(valor).subtract(taxa);
-        contaDestino.saldo = valor;
+        contaDestino.saldo = contaDestino.saldo.add(valor);
         System.out.println("Transferencia efetuada!");
     }
 

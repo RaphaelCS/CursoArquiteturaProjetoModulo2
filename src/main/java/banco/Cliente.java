@@ -2,8 +2,6 @@ package banco;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class Cliente {
 
@@ -15,7 +13,6 @@ public class Cliente {
     private LocalDate dataCadastro;
 
     private Status status;
-
 
     private ArrayList<Conta> listaContas = new ArrayList<>();
 
@@ -53,10 +50,6 @@ public class Cliente {
 
     public LocalDate getDataCadastro() {
         return dataCadastro;
-    }
-
-    public void setDataCadastro(LocalDate dataCadastro) {
-        this.dataCadastro = dataCadastro;
     }
 
     public Status getStatus() {
