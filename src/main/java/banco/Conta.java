@@ -52,6 +52,10 @@ public class Conta {
     }
 
     public void saque(BigDecimal valor) {
+        if(cliente.getStatus().equals(StatusEnum.INATIVO)){
+            System.out.println("Cliente inativado");
+            return;
+        }
         BigDecimal taxa = getTaxa(cliente, valor);
         if (valor.add(taxa).compareTo(saldo) > 0) {
             System.out.println("Saldo insuficiente.");
@@ -62,11 +66,19 @@ public class Conta {
     }
 
     public void deposito(BigDecimal valor) {
+        if(cliente.getStatus().equals(StatusEnum.INATIVO)){
+            System.out.println("Cliente inativado");
+            return;
+        }
         saldo = saldo.add(valor);
         System.out.println("Deposito efetuado!");
     }
 
     public void transferencia(BigDecimal valor, Conta contaDestino) {
+        if(cliente.getStatus().equals(StatusEnum.INATIVO)){
+            System.out.println("Cliente inativado");
+            return;
+        }
         BigDecimal taxa = getTaxa(cliente, valor);
         if (valor.add(taxa).compareTo(saldo) > 0) {
             System.out.println("Saldo insuficiente.");

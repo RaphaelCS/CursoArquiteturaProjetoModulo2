@@ -13,7 +13,6 @@ public class Cliente {
     private StatusEnum statusEnum;
 
     private ContaCorrente contaCorrente;
-    private ArrayList<Conta> listaContas = new ArrayList<>();
 
     public Cliente(String id, TipoPessoaEnum tipoPessoaEnum, String nome) {
         this.id = id;
@@ -39,15 +38,11 @@ public class Cliente {
     }
 
     public void setContaCorrente(ContaCorrente contaCorrente) {
+        if(getStatus().equals(StatusEnum.INATIVO)){
+            System.out.println("Cliente inativado");
+            return;
+        }
         this.contaCorrente = contaCorrente;
-    }
-
-    public ArrayList<Conta> getListaContas() {
-        return listaContas;
-    }
-
-    public void setListaContas(ArrayList<Conta> listaContas) {
-        this.listaContas = listaContas;
     }
 
     public String getId() {

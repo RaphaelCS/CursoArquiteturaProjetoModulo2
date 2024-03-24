@@ -20,9 +20,4 @@ public class ContaInvestimento extends Conta{
         System.out.println("Rendimento do investimento: "+rendimento);
         return rendimento;
     }
-
-    public void setRendimento(BigDecimal rendimento) {
-        this.rendimento = rendimento;
-    }
-
 }
