@@ -1,5 +1,5 @@
 package banco;
 
-public enum TipoPessoa {
+public enum TipoPessoaEnum {
     FISICA, JURIDICA
 }

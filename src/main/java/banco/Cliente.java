@@ -1,20 +1,46 @@
 package banco;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Cliente {
 
-    private Double id;
-
-    private TipoPessoa tipoPessoa;
-
+    private final LocalDate dataCadastro;
+    private String id;
+    private TipoPessoaEnum tipoPessoaEnum;
     private String nome;
-    private LocalDate dataCadastro;
+    private StatusEnum statusEnum;
 
-    private Status status;
-
+    private ContaCorrente contaCorrente;
     private ArrayList<Conta> listaContas = new ArrayList<>();
+
+    public Cliente(String id, TipoPessoaEnum tipoPessoaEnum, String nome) {
+        this.id = id;
+        this.tipoPessoaEnum = tipoPessoaEnum;
+        this.nome = nome;
+        dataCadastro = LocalDate.now();
+        statusEnum = StatusEnum.ATIVO;
+    }
+
+
+
+    public Cliente(String id, TipoPessoaEnum tipoPessoaEnum, String nome, Integer numeroConta, BigDecimal saldo) {
+        this.id = id;
+        this.tipoPessoaEnum = tipoPessoaEnum;
+        this.nome = nome;
+        dataCadastro = LocalDate.now();
+        statusEnum = StatusEnum.ATIVO;
+        contaCorrente = new ContaCorrente(numeroConta,saldo);
+    }
+
+    public ContaCorrente getContaCorrente() {
+        return contaCorrente;
+    }
+
+    public void setContaCorrente(ContaCorrente contaCorrente) {
+        this.contaCorrente = contaCorrente;
+    }
 
     public ArrayList<Conta> getListaContas() {
         return listaContas;
@@ -24,20 +50,20 @@ public class Cliente {
         this.listaContas = listaContas;
     }
 
-    public Double getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Double id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public TipoPessoa getTipoPessoa() {
-        return tipoPessoa;
+    public TipoPessoaEnum getTipoPessoa() {
+        return tipoPessoaEnum;
     }
 
-    public void setTipoPessoa(TipoPessoa tipoPessoa) {
-        this.tipoPessoa = tipoPessoa;
+    public void setTipoPessoa(TipoPessoaEnum tipoPessoaEnum) {
+        this.tipoPessoaEnum = tipoPessoaEnum;
     }
 
     public String getNome() {
@@ -52,30 +78,22 @@ public class Cliente {
         return dataCadastro;
     }
 
-    public Status getStatus() {
-        return status;
+    public StatusEnum getStatus() {
+        return statusEnum;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public Cliente(Double id, TipoPessoa tipoPessoa, String nome) {
-        this.id = id;
-        this.tipoPessoa = tipoPessoa;
-        this.nome = nome;
-        dataCadastro = LocalDate.now();
-        status = Status.ATIVO;
+    public void setStatus(StatusEnum statusEnum) {
+        this.statusEnum = statusEnum;
     }
 
     @Override
     public String toString() {
         return "Cliente{" +
                 "id=" + id +
-                ", tipoPessoa=" + tipoPessoa +
+                ", tipoPessoa=" + tipoPessoaEnum +
                 ", nome='" + nome + '\'' +
                 ", dataCadastro=" + dataCadastro +
-                ", status=" + status +
+                ", status=" + statusEnum +
                 '}';
     }
 }

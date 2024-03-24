@@ -1,5 +1,5 @@
 package banco;
 
-public enum Status {
+public enum StatusEnum {
     ATIVO, INATIVO
 }
