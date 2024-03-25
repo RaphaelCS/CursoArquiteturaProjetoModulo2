@@ -32,20 +32,23 @@ public class Main {
             poupanca = new ContaPoupanca(1,new BigDecimal(2000), cliente);
             BancoContas.listaContas.add(poupanca);
             poupanca1 = new ContaPoupanca(1,new BigDecimal(2000), cliente1);
+
+            poupanca.deposito(BigDecimal.valueOf(100));
+            poupanca.consultaSaldo();
+            poupanca.saque(BigDecimal.valueOf(500));
+            poupanca.consultaSaldo();
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
         System.out.println(poupanca);
         System.out.println(poupanca1);
 
-        poupanca.deposito(BigDecimal.valueOf(100));
-        poupanca.consultaSaldo();
-        poupanca.saque(BigDecimal.valueOf(500));
-        poupanca.consultaSaldo();
+
 
         System.out.println("CONTA PESSOA INVESTIMENTO");
 
-        ContaInvestimento investimento = cliente.getContaCorrente().investir(new BigDecimal(100), cliente.getContaCorrente());
+        ContaInvestimento investimento = ContaInvestimento.investir(BigDecimal.valueOf(100),cliente.getContaCorrente());
+
         BancoContas.listaContas.add(investimento);
         investimento.deposito(BigDecimal.valueOf(100));
         investimento.consultaSaldo();
@@ -53,7 +56,7 @@ public class Main {
         investimento.consultaSaldo();
         investimento.getRendimento();
 
-        ContaInvestimento investimento1 = new ContaInvestimento(3,new BigDecimal(100), cliente1);
+        ContaInvestimento investimento1 = ContaInvestimento.investir(BigDecimal.valueOf(100),cliente1.getContaCorrente());
         BancoContas.listaContas.add(investimento1);
         investimento1.getRendimento();
     }

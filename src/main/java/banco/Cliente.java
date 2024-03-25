@@ -3,6 +3,7 @@ package banco;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Cliente {
 
@@ -90,5 +91,18 @@ public class Cliente {
                 ", dataCadastro=" + dataCadastro +
                 ", status=" + statusEnum +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(dataCadastro, cliente.dataCadastro) && Objects.equals(id, cliente.id) && tipoPessoaEnum == cliente.tipoPessoaEnum && Objects.equals(nome, cliente.nome) && statusEnum == cliente.statusEnum;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dataCadastro, id, tipoPessoaEnum, nome, statusEnum);
     }
 }

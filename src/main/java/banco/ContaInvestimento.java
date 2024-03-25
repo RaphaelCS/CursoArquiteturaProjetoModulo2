@@ -6,9 +6,20 @@ public class ContaInvestimento extends Conta{
 
     private BigDecimal rendimento;
 
-    public ContaInvestimento(Integer numero, BigDecimal saldo, Cliente cliente) {
+    private ContaInvestimento(Integer numero, BigDecimal saldo, Cliente cliente) {
         super(numero, saldo, cliente);
         setTipoConta(TipoContaEnum.INVESTIMENTO);
+    }
+
+    public static ContaInvestimento investir(BigDecimal valor, ContaCorrente pConta){
+        Conta conta = BancoContas.buscarConta(pConta.getCliente(),TipoContaEnum.INVESTIMENTO);
+        if(conta==null){
+            conta = new ContaInvestimento(pConta.getNumero(),BigDecimal.valueOf(0),pConta.getCliente());
+            System.out.println("Conta investimento criada!");
+        }
+        pConta.transferencia(valor,conta);
+        System.out.println("Investimento efetuado!");
+        return (ContaInvestimento) conta;
     }
 
     public BigDecimal getRendimento() {
