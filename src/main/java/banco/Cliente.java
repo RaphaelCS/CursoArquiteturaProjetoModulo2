@@ -23,15 +23,13 @@ public class Cliente {
         statusEnum = StatusEnum.ATIVO;
     }
 
-
-
     public Cliente(String id, TipoPessoaEnum tipoPessoaEnum, String nome, Integer numeroConta, BigDecimal saldo) {
         this.id = id;
         this.tipoPessoaEnum = tipoPessoaEnum;
         this.nome = nome;
         dataCadastro = LocalDate.now();
         statusEnum = StatusEnum.ATIVO;
-        contaCorrente = new ContaCorrente(numeroConta,saldo);
+        contaCorrente = new ContaCorrente(numeroConta,saldo,this);
     }
 
     public ContaCorrente getContaCorrente() {
