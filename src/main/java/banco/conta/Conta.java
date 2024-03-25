@@ -1,16 +1,21 @@
-package banco;
+package banco.conta;
+
+import banco.cliente.Cliente;
+import banco.enums.StatusEnum;
+import banco.enums.TipoContaEnum;
+import banco.enums.TipoPessoaEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Conta {
+public abstract class Conta {
 
     private final LocalDate dataCriacao = LocalDate.now();
     private Integer numero;
     private BigDecimal saldo;
     private Cliente cliente;
 
-    private  TipoContaEnum tipoConta;
+    private TipoContaEnum tipoConta;
 
     public Conta(Integer numero, BigDecimal saldo, TipoContaEnum tipoConta, Cliente cliente) {
         this.numero = numero;

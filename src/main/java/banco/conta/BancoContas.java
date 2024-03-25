@@ -1,4 +1,7 @@
-package banco;
+package banco.conta;
+
+import banco.cliente.Cliente;
+import banco.enums.TipoContaEnum;
 
 import java.util.ArrayList;
 
