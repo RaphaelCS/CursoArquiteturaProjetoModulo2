@@ -1,4 +1,4 @@
-package banco.cliente;
+package banco.model;
 
 import banco.enums.TipoPessoaEnum;
 

@@ -1,35 +1,39 @@
-package banco.conta;
+package banco.model;
 
-import banco.cliente.Cliente;
 import banco.enums.StatusEnum;
 import banco.enums.TipoContaEnum;
 import banco.enums.TipoPessoaEnum;
+import banco.service.BancoDadosContasService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public abstract class Conta {
 
     private final LocalDate dataCriacao = LocalDate.now();
     private Integer numero;
+
     private BigDecimal saldo;
     private Cliente cliente;
 
     private TipoContaEnum tipoConta;
 
     public Conta(Integer numero, BigDecimal saldo, TipoContaEnum tipoConta, Cliente cliente) {
+        if(cliente.getStatus().equals(StatusEnum.INATIVO)){
+            System.out.println("Conta não pode ser criada. Cliente invativado.");
+            return;
+        }
         this.numero = numero;
         this.saldo = saldo;
         this.cliente = cliente;
         this.tipoConta = tipoConta;
     }
 
+    public Conta (){}
+
     public TipoContaEnum getTipoConta() {
         return tipoConta;
-    }
-
-    public void setTipoConta(TipoContaEnum tipoConta) {
-        this.tipoConta = tipoConta;
     }
 
     public Cliente getCliente() {
@@ -44,10 +48,6 @@ public abstract class Conta {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
-    }
-
     public BigDecimal getSaldo() {
         return saldo;
     }
@@ -56,6 +56,14 @@ public abstract class Conta {
         return dataCriacao;
     }
 
+    public void setSaldo(BigDecimal saldo) {
+        if(saldo.compareTo(BigDecimal.valueOf(0))==-1){
+            System.out.println("Saldo não pode ser negativo");
+            return;
+        }
+        this.saldo = saldo;
+    }
+/*
     public void saque(BigDecimal valor) {
         if(cliente.getStatus().equals(StatusEnum.INATIVO)){
             System.out.println("Cliente inativado");
@@ -66,7 +74,7 @@ public abstract class Conta {
             System.out.println("Saldo insuficiente.");
             return;
         }
-        saldo = saldo.subtract(valor).subtract(taxa);
+        setSaldo(getSaldo().subtract(valor).subtract(taxa));
         System.out.println("Saque efetuado!");
     }
 
@@ -84,7 +92,7 @@ public abstract class Conta {
             System.out.println("Cliente inativado");
             return;
         }
-        Conta contaDestino = BancoContas.getConta(clienteDestino,TipoContaEnum.CORRENTE);
+        Conta contaDestino = BancoDadosContasService.getConta(clienteDestino,TipoContaEnum.CORRENTE);
         if(contaDestino==null){
             System.out.println("Conta destino inexistente!");
             return;
@@ -111,7 +119,7 @@ public abstract class Conta {
         System.out.println("Saldo: " + saldo);
         return saldo;
     }
-
+*/
     @Override
     public String toString() {
         return "Conta{" +
@@ -121,5 +129,18 @@ public abstract class Conta {
                 ", cliente=" + cliente +
                 ", tipoConta=" + tipoConta +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Conta conta = (Conta) o;
+        return Objects.equals(dataCriacao, conta.dataCriacao) && Objects.equals(numero, conta.numero) && Objects.equals(saldo, conta.saldo) && Objects.equals(cliente, conta.cliente) && tipoConta == conta.tipoConta;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dataCriacao, numero, saldo, cliente, tipoConta);
     }
 }

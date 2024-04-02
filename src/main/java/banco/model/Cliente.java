@@ -1,6 +1,5 @@
-package banco.cliente;
+package banco.model;
 
-import banco.conta.ContaCorrente;
 import banco.enums.StatusEnum;
 import banco.enums.TipoPessoaEnum;
 
@@ -10,8 +9,8 @@ import java.util.Objects;
 
 public abstract class Cliente {
 
-    private final LocalDate dataCadastro;
-    private TipoPessoaEnum tipoPessoaEnum;
+    private final LocalDate dataCadastro = LocalDate.now();
+    private final TipoPessoaEnum tipoPessoaEnum;
     private String nome;
     private StatusEnum statusEnum;
 
@@ -20,14 +19,12 @@ public abstract class Cliente {
     public Cliente(TipoPessoaEnum tipoPessoaEnum, String nome) {
         this.tipoPessoaEnum = tipoPessoaEnum;
         this.nome = nome;
-        dataCadastro = LocalDate.now();
         statusEnum = StatusEnum.ATIVO;
     }
 
     public Cliente(TipoPessoaEnum tipoPessoaEnum, String nome, Integer numeroConta, BigDecimal saldo) {
         this.tipoPessoaEnum = tipoPessoaEnum;
         this.nome = nome;
-        dataCadastro = LocalDate.now();
         statusEnum = StatusEnum.ATIVO;
         contaCorrente = new ContaCorrente(numeroConta,saldo,this);
     }
@@ -36,20 +33,8 @@ public abstract class Cliente {
         return contaCorrente;
     }
 
-    public void setContaCorrente(ContaCorrente contaCorrente) {
-        if(getStatus().equals(StatusEnum.INATIVO)){
-            System.out.println("Cliente inativado");
-            return;
-        }
-        this.contaCorrente = contaCorrente;
-    }
-
     public TipoPessoaEnum getTipoPessoa() {
         return tipoPessoaEnum;
-    }
-
-    public void setTipoPessoa(TipoPessoaEnum tipoPessoaEnum) {
-        this.tipoPessoaEnum = tipoPessoaEnum;
     }
 
     public String getNome() {
@@ -64,9 +49,7 @@ public abstract class Cliente {
         return dataCadastro;
     }
 
-    public StatusEnum getStatus() {
-        return statusEnum;
-    }
+    public StatusEnum getStatus() { return statusEnum; }
 
     public void setStatus(StatusEnum statusEnum) {
         this.statusEnum = statusEnum;
