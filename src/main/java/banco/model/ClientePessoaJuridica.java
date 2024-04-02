@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class ClientePessoaJuridica extends Cliente{
 
-    private String cpnj;
+    private final String cpnj;
     public String getCpnj() {
         return cpnj;
     }

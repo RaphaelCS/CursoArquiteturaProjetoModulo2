@@ -2,8 +2,6 @@ package banco.model;
 
 import banco.enums.StatusEnum;
 import banco.enums.TipoContaEnum;
-import banco.enums.TipoPessoaEnum;
-import banco.service.BancoDadosContasService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

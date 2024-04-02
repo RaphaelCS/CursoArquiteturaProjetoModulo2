@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class ClientePessoaFisica extends Cliente{
 
-    private String cpf;
+    private final String cpf;
     public String getCpf() {
         return cpf;
     }

@@ -8,13 +8,13 @@ import java.math.BigDecimal;
 
 public interface ContaService {
 
-    public void saque(Conta conta, BigDecimal valor);
+    void saque(Conta conta, BigDecimal valor);
 
-    public void deposito(Conta conta, BigDecimal valor);
+    void deposito(Conta conta, BigDecimal valor);
 
-    public void transferencia(Conta conta, Conta contaDestino, BigDecimal valor);
+    void transferencia(Conta conta, Conta contaDestino, BigDecimal valor);
 
-    public BigDecimal consultaSaldo(Conta conta);
+    BigDecimal consultaSaldo(Conta conta);
 
     default Boolean getStatusCliente(Cliente cliente){
         if(cliente.getStatus().equals(StatusEnum.INATIVO)){

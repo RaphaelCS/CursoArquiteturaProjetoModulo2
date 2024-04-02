@@ -1,6 +1,5 @@
 package banco.service;
 
-import banco.enums.TipoContaEnum;
 import banco.enums.TipoPessoaEnum;
 import banco.model.Conta;
 import banco.model.ContaCorrente;

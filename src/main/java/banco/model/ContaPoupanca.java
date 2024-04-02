@@ -1,8 +1,6 @@
 package banco.model;
 
-import banco.model.ClientePessoaFisica;
 import banco.enums.TipoContaEnum;
-import banco.model.Conta;
 
 import java.math.BigDecimal;
 
