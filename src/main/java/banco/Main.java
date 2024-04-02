@@ -9,6 +9,7 @@ import banco.model.ContaInvestimento;
 import banco.model.ContaPoupanca;
 import banco.model.Conta;
 import banco.service.ContaCorrenteServiceImpl;
+import banco.service.ContaInvestimentoServiceImpl;
 import banco.service.ContaService;
 
 import java.math.BigDecimal;
@@ -38,15 +39,15 @@ public class Main {
         contaService.transferencia(cliente.getContaCorrente(), cliente1.getContaCorrente(), BigDecimal.valueOf(100));
         contaService.consultaSaldo(cliente.getContaCorrente());
         contaService.consultaSaldo(cliente1.getContaCorrente());
-/*
+
         System.out.println("******CONTA POUPANÇA*******");
 
 
         Conta poupanca = new ContaPoupanca(1,new BigDecimal(2000), (ClientePessoaFisica) cliente);
-        poupanca.deposito(BigDecimal.valueOf(100));
-        poupanca.consultaSaldo();
-        poupanca.saque(BigDecimal.valueOf(500));
-        poupanca.consultaSaldo();
+        contaService.deposito(poupanca,BigDecimal.valueOf(100));
+        contaService.consultaSaldo(poupanca);
+        contaService.saque(poupanca,BigDecimal.valueOf(500));
+        contaService.consultaSaldo(poupanca);
 
         //Conta poupanca1 = new ContaPoupanca(1,new BigDecimal(2000), cliente1);não pode criar
 
@@ -57,17 +58,19 @@ public class Main {
 
         System.out.println("****CONTA INVESTIMENTO*******");
 
-        ContaInvestimento investimento = ContaInvestimento.investir(BigDecimal.valueOf(100),cliente.getContaCorrente());
+        ContaInvestimentoServiceImpl contaInvestimentoService = new ContaInvestimentoServiceImpl();
 
-        investimento.deposito(BigDecimal.valueOf(100));
-        investimento.consultaSaldo();
-        investimento.saque(BigDecimal.valueOf(50));
-        investimento.consultaSaldo();
-        investimento.getRendimento();
+        ContaInvestimento contaInvestimento = contaInvestimentoService.investir(BigDecimal.valueOf(100),cliente.getContaCorrente());
 
-        ContaInvestimento investimento1 = ContaInvestimento.investir(BigDecimal.valueOf(100),cliente1.getContaCorrente());
-        investimento1.getRendimento();
+        contaInvestimentoService.deposito(contaInvestimento,BigDecimal.valueOf(100));
+        contaInvestimentoService.consultaSaldo(contaInvestimento);
+        contaInvestimentoService.saque(contaInvestimento,BigDecimal.valueOf(50));
+        contaInvestimentoService.consultaSaldo(contaInvestimento);
+        contaInvestimentoService.getRendimento(contaInvestimento);
 
- */
+        ContaInvestimento investimento1 = contaInvestimentoService.investir(BigDecimal.valueOf(100),cliente1.getContaCorrente());
+        contaInvestimentoService.getRendimento(investimento1);
+
+
     }
 }
